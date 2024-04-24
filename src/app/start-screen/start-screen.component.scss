@@ -12,3 +12,19 @@
         width: 90%;
     }
 }
+
+.start-label-box{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    >img{
+        height: 200px;
+        &:hover{
+            filter: brightness(1.25);
+            cursor: pointer;
+        }
+    }
+}

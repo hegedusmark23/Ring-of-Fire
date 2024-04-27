@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Game } from '../../models/game';
 import { PlayerComponent } from '../player/player.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -18,7 +18,8 @@ export class GameComponent implements OnInit {
   pickCardAnimation = false;
   currentCard: string = '';
   public game: Game = new Game();
-
+  dialogRef: any;
+  @Input() isMale: boolean | undefined;
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -44,13 +45,12 @@ export class GameComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe((name: string) => {
+      this.game.players.push(name);
+    }); 
   }
+
 
 }

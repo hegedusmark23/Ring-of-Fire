@@ -1,12 +1,24 @@
 <h2 mat-dialog-title>Add new player</h2>
-<mat-dialog-content>
+<mat-dialog-content style="display: flex; flex-direction: column;">
+
   <p>Please enter the players name.</p>
   <mat-form-field>
+
     <mat-label>Name</mat-label>
     <input matInput [(ngModel)]="name">
+
   </mat-form-field>
+
+  <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+    <mat-button-toggle (click)="this.isMale = true" style="width: 50%;" value="red">Male</mat-button-toggle>   
+    <mat-button-toggle (click)="this.isMale = false" style="width: 50%;" value="blue">Female</mat-button-toggle>
+  </mat-button-toggle-group>
+  
 </mat-dialog-content>
+
+
+
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
 </mat-dialog-actions>

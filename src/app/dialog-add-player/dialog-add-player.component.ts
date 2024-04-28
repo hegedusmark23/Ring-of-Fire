@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {FormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -16,20 +16,16 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
   styleUrl: './dialog-add-player.component.scss'
 })
 export class DialogAddPlayerComponent {
+
+  constructor(public dialogRef: MatDialogRef<DialogAddPlayerComponent>) { }
   @Output() isMaleChanged = new EventEmitter<boolean>();
 
   isMale: boolean = true;  
   name:string = '';
-  dialogRef: any;
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  // Method to toggle isMale
-  toggleIsMale(value: boolean) {
-    this.isMale = value;
-    this.isMaleChanged.emit(this.isMale);
-  }
 
 }

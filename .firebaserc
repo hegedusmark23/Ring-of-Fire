@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ringoffire-e55ae": {
+      "hosting": {
+        "ringoffire": [
+          "ringoffire-e55ae"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ringoffire-e55ae"
+  }
+}

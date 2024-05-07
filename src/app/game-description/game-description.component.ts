@@ -20,7 +20,7 @@ export class GameDescriptionComponent implements OnInit, OnChanges{
     { title: 'Chicks', description: 'All girls drink.' },
     { title: 'Heaven', description: 'Put your hands up! The last player drinks!' },
     { title: 'Mate', description: 'Pick a mate. Your mate must always drink when you drink and the other way around.' },
-    { title: 'Thumbmaster', description: '' },
+    { title: 'Thumbmaster', description: 'Your previous decides who drinks.' },
     { title: 'Men', description: 'All men drink.' },
     { title: 'Quizmaster', description: 'Your next decides who drinks' },
     { title: 'Never have i ever...', description: 'Say something you nnever did. Everyone who did it has to drink.' },

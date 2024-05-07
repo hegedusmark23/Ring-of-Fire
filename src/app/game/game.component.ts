@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Game } from '../../models/game';
 import { PlayerComponent } from '../player/player.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -8,6 +8,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { GameDescriptionComponent } from "../game-description/game-description.component";
 import { MatCardModule } from '@angular/material/card';
+import { Firestore, collection } from '@angular/fire/firestore'
 
 @Component({
     selector: 'app-game',
@@ -21,10 +22,22 @@ export class GameComponent implements OnInit {
   currentCard: string = '';
   public game: Game = new Game();
   dialogRef: any;
-  constructor(public dialog: MatDialog) {}
+
+  firestore: Firestore = inject(Firestore);
+
+  constructor(public dialog: MatDialog) {
+
+  }
 
   ngOnInit(): void {
     this.newGame();
+    this
+    .firestore
+    .collection(this.firestore, 'games')
+    .valueChanges()
+    .subscribe((game:String) => {
+      console.log('Game update', game)
+    });
   }
 
   newGame() {

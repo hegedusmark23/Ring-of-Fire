@@ -14,6 +14,7 @@ export class PlayerComponent {
   @Input() name: string | undefined;
   @Input() isMale: boolean = true;
   @Input() playerActive: boolean = false;
+  @Input() image: string | undefined;
   imgUrl: string = '';
   
   ngOnInit(){

@@ -12,6 +12,7 @@ import { Firestore, collection, docData } from '@angular/fire/firestore'
 import { Observable } from 'rxjs';
 import { doc, setDoc } from 'firebase/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 
 @Component({
@@ -45,6 +46,7 @@ export class GameComponent implements OnInit {
         this.game.stack = game.stack;
         this.game.pickCardAnimation = game.pickCardAnimation;
         this.game.currentCard = game.currentCard;
+        this.game.player_images = game.player_images;
       });
     });
   }
@@ -76,6 +78,7 @@ getGamesRef(){
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
       this.game.players.push(name);
+      this.game.player_images.push('male-player1');
       this.saveGame();
       }
     }); 
@@ -86,6 +89,24 @@ getGamesRef(){
     this.game$.subscribe(() => {
       setDoc(gameDocRef, this.game.toJson());
     });
+  }
+
+  editPlayer(playerId: number){
+    console.log('Edit player:', playerId);
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+
+    dialogRef.afterClosed().subscribe((change: string) => {
+      if (change) {
+        if (change == 'DELETE') {
+          this.game.players.splice(playerId,1)
+        } else {
+          console.log('Recived Change:', change);
+          this.game.player_images[playerId] = change;
+          this.saveGame();
+        }
+        this.saveGame();
+      }
+    }); 
   }
 
 }
